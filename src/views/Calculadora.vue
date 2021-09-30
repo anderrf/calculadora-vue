@@ -2,7 +2,8 @@
     <v-container>
         <v-row>
             <v-col>
-                <v-input class="grey lighten-3" color="#000">{{display}}
+                <v-input class="grey lighten-3" color="#000">
+                    {{display}}
                 </v-input>
             </v-col>
         </v-row>
@@ -10,44 +11,44 @@
             <v-col>
                 <v-row>
                     <v-col>
-                        <v-btn>7</v-btn>
+                        <v-btn @click="adicionarAlgarismo(7)">7</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn>8</v-btn>
+                        <v-btn @click="adicionarAlgarismo(8)">8</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn>9</v-btn>
+                        <v-btn @click="adicionarAlgarismo(9)">9</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn color="primary">+</v-btn>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col>
-                        <v-btn>4</v-btn>
-                    </v-col>
-                    <v-col>
-                        <v-btn>5</v-btn>
-                    </v-col>
-                    <v-col>
-                        <v-btn>6</v-btn>
-                    </v-col>
-                    <v-col>
-                        <v-btn color="primary">-</v-btn>
+                        <v-btn color="primary" @click="adicionarOperacao('+')">+</v-btn>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
-                        <v-btn>1</v-btn>
+                        <v-btn @click="adicionarAlgarismo(4)">4</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn>2</v-btn>
+                        <v-btn @click="adicionarAlgarismo(5)">5</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn>3</v-btn>
+                        <v-btn @click="adicionarAlgarismo(6)">6</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn color="primary">*</v-btn>
+                        <v-btn color="primary" @click="adicionarOperacao('-')">-</v-btn>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <v-btn @click="adicionarAlgarismo(1)">1</v-btn>
+                    </v-col>
+                    <v-col>
+                        <v-btn @click="adicionarAlgarismo(2)">2</v-btn>
+                    </v-col>
+                    <v-col>
+                        <v-btn @click="adicionarAlgarismo(3)">3</v-btn>
+                    </v-col>
+                    <v-col>
+                        <v-btn color="primary" @click="adicionarOperacao('*')">*</v-btn>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -55,21 +56,21 @@
                         <v-btn>.</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn>0</v-btn>
+                        <v-btn @click="adicionarAlgarismo(0)">0</v-btn>
                     </v-col>
                     <v-col>
                         <v-btn>=</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn color="primary">/</v-btn>
+                        <v-btn color="primary" @click="adicionarOperacao('/')">/</v-btn>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
-                        <v-btn block color="error">CE</v-btn>
+                        <v-btn block color="error" @click="limpar()">CE</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn block color="success">=</v-btn>
+                        <v-btn block color="success" @click="executarOperacao()">=</v-btn>
                     </v-col>
                 </v-row>
             </v-col>
@@ -83,7 +84,46 @@
         return{
             display: 0,
             val1: null,
-            val2: null
+            val2: null,
+            op: null
+        }
+    },
+    methods: {
+        limpar(){
+            this.display = 0;
+            this.val1 = this.val2 = this.op = null;
+        },
+        adicionarAlgarismo(num){
+            this.display = parseFloat(this.display.toString() + num.toString());
+        },
+        adicionarOperacao(operador){
+            if(this.op === null && this.val1 === null){
+                this.op = operador;
+                this.val1 = this.display;
+                this.display = 0;
+            }
+        },
+        executarOperacao(){
+            if(this.op !== null && this.val1 !== null){
+                this.val2 = this.display;
+                let resultado;
+                switch(this.op){
+                    case '+':
+                        resultado = this.val1 + this.val2;
+                        break;
+                    case '-':
+                        resultado = this.val1 - this.val2;
+                        break;
+                    case '*':
+                        resultado = this.val1 * this.val2;
+                        break;
+                    case '/':
+                        resultado = this.val1 / this.val2;
+                        break;
+                }
+                this.display = resultado;
+                this.val1 = this.val2 = this.op = null;
+            }
         }
     }
   }
