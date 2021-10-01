@@ -53,7 +53,7 @@
                 </v-row>
                 <v-row>
                     <v-col>
-                        <v-btn>.</v-btn>
+                        <v-btn @click="fracionar()">.</v-btn>
                     </v-col>
                     <v-col>
                         <v-btn @click="adicionarAlgarismo(0)">0</v-btn>
@@ -102,6 +102,9 @@
                 this.val1 = parseFloat(this.display);
                 this.display = '0';
             }
+            else if(this.display !== '0' && this.display !== '-' && this.op !== null && this.val1 !== null){
+                this.executarOperacao();
+            }
         },
         executarOperacao(){
             if(this.op !== null && this.val1 !== null){
@@ -131,6 +134,11 @@
             }
             else{
                 this.adicionarOperacao('-');
+            }
+        },
+        fracionar(){
+            if(Number.isInteger(parseFloat(this.display))){
+                this.display = this.display + '.';
             }
         }
     }
