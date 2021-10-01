@@ -2,7 +2,7 @@
     <v-container>
         <v-row>
             <v-col>
-                <v-input class="grey lighten-3" color="#000">
+                <v-input class="grey lighten-3" color="#000" disabled>
                     {{display}}
                 </v-input>
             </v-col>
@@ -94,7 +94,12 @@
             this.val1 = this.val2 = this.op = null;
         },
         adicionarAlgarismo(num){
-            this.display = parseFloat(this.display + num.toString()).toString();
+            if(num === 0 && this.display.includes('.')){
+                this.display += num;
+            }
+            else{
+                this.display = parseFloat(this.display + num.toString()).toString();
+            }
         },
         adicionarOperacao(operador){
             if(this.op === null && this.val1 === null){
@@ -145,5 +150,5 @@
   }
 </script>
 <style scoped>
-    
+
 </style>
