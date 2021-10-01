@@ -2,9 +2,7 @@
     <v-container>
         <v-row>
             <v-col>
-                <v-input class="grey lighten-3" color="#000" disabled>
-                    {{display}}
-                </v-input>
+                <v-text-field v-model="last" solo-inverted disabled :label="display" reverse></v-text-field>
             </v-col>
         </v-row>
         <v-row>
