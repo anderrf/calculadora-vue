@@ -1,26 +1,18 @@
 <template>
   <v-app>
     <v-main>
-      <v-toolbar>
-        <v-spacer></v-spacer>
-        <router-link to="/calculadora">
-          <v-btn icon>
-            <v-icon>mdi-calculator</v-icon>
-          </v-btn>
-        </router-link>
-        <router-link to="/cronometro">
-          <v-btn icon>
-            <v-icon>mdi-timer</v-icon>
-          </v-btn>
-        </router-link>
-      </v-toolbar>
+      <AppToolBar/>
       <router-view/>
     </v-main>
   </v-app>
 </template>
 <script>
+  import AppToolBar from './components/shared/AppToolBar'
   export default {
-    name: 'App'
+    name: 'App',
+    components: {
+      AppToolBar
+    }
   }
 </script>
 <style>
@@ -37,9 +29,5 @@
 
   a{
     text-decoration: none;
-  }
-
-  .router-view{
-    width: 50% !important;
   }
 </style>
