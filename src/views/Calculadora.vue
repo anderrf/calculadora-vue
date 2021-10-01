@@ -34,7 +34,7 @@
                         <v-btn @click="adicionarAlgarismo(6)">6</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn color="primary" @click="adicionarOperacao('-')">-</v-btn>
+                        <v-btn color="primary" @click="negativar()">-</v-btn>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -82,7 +82,7 @@
     name: 'Calculadora',
     data(){
         return{
-            display: 0,
+            display: '0',
             val1: null,
             val2: null,
             op: null
@@ -90,22 +90,22 @@
     },
     methods: {
         limpar(){
-            this.display = 0;
+            this.display = '0';
             this.val1 = this.val2 = this.op = null;
         },
         adicionarAlgarismo(num){
-            this.display = parseFloat(this.display.toString() + num.toString());
+            this.display = parseFloat(this.display + num.toString()).toString();
         },
         adicionarOperacao(operador){
             if(this.op === null && this.val1 === null){
                 this.op = operador;
-                this.val1 = this.display;
-                this.display = 0;
+                this.val1 = parseFloat(this.display);
+                this.display = '0';
             }
         },
         executarOperacao(){
             if(this.op !== null && this.val1 !== null){
-                this.val2 = this.display;
+                this.val2 = parseFloat(this.display);
                 let resultado;
                 switch(this.op){
                     case '+':
@@ -121,8 +121,16 @@
                         resultado = this.val1 / this.val2;
                         break;
                 }
-                this.display = resultado;
+                this.display = resultado.toString();
                 this.val1 = this.val2 = this.op = null;
+            }
+        },
+        negativar(){
+            if(this.display === '0' && this.val2 === null){
+                this.display = '-';
+            }
+            else{
+                this.adicionarOperacao('-');
             }
         }
     }
