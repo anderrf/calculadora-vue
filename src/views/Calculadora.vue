@@ -2,7 +2,7 @@
     <v-container>
         <v-row>
             <v-col>
-                <v-text-field v-model="last" solo-inverted disabled :label="display" reverse></v-text-field>
+                <v-text-field solo-inverted disabled :label="display" reverse></v-text-field>
             </v-col>
         </v-row>
         <v-row>
@@ -57,7 +57,7 @@
                         <v-btn @click="adicionarAlgarismo(0)">0</v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn>=</v-btn>
+                        <v-btn></v-btn>
                     </v-col>
                     <v-col>
                         <v-btn color="primary" @click="adicionarOperacao('/')">/</v-btn>

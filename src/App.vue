@@ -1,13 +1,18 @@
 <template>
   <v-app>
     <v-main>
+      <AppToolBar/>
       <router-view/>
     </v-main>
   </v-app>
 </template>
 <script>
+  import AppToolBar from './components/shared/AppToolBar'
   export default {
-    name: 'App'
+    name: 'App',
+    components: {
+      AppToolBar
+    }
   }
 </script>
 <style>
@@ -20,8 +25,9 @@
   body{
     width: 100vw;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  }
+
+  a{
+    text-decoration: none;
   }
 </style>
